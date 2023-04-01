@@ -24,7 +24,7 @@ public class BookRepository {
         sessionFactory.close();
         return 1;
     }
-    public BookEntity getId(String id) {
+    public BookEntity getId(Integer id) {
         Session session = sessionFactory.openSession();
         BookEntity entity = session.find(BookEntity.class, id);
         session.close();
@@ -40,7 +40,7 @@ public class BookRepository {
         sessionFactory.close();
         return bookDtoList;
     }
-    public int deleteBook(String id) {
+    public int deleteBook(Integer id) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         List<BookEntity> bookEntityList = session.createQuery("delete from  BookEntity where id = " + id + "", BookEntity.class).getResultList();

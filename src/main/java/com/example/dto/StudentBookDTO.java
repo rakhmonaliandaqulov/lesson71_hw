@@ -10,9 +10,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class StudentBookDTO {
-    private String  id;
-    private String studentId;
-    private String bookId;
+    private Integer  id;
+    private Integer studentId;
+    private Integer bookId;
 
     private LocalDateTime createdDate;
     private StudentBookStatus status;

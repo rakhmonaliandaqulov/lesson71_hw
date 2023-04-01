@@ -18,8 +18,8 @@ public class BookController {
     private List<BookEntity> bookEntityList = new LinkedList<>();
     public BookController() {
         BookEntity s1 = new BookEntity();
-        s1.setId(UUID.randomUUID().toString());
-        s1.setTitle("O'tgan kunlar");
+        s1.setId(s1.getId());
+        s1.setTitle(String.valueOf(1212));
         s1.setAuthor("Ali Aliyev");
         s1.setAmount(12);
         s1.setPublishYear("2003");
@@ -41,14 +41,14 @@ public class BookController {
     }
 
     @DeleteMapping(value = "/delete/{id}")
-    public Boolean delete(@PathVariable("id") String id) {
+    public Boolean delete(@PathVariable("id") Integer id) {
         return bookService.deleteBook(id);
     }
 
 
     @PostMapping(value = "/create")
     public BookEntity create(@RequestBody BookEntity book) {
-        book.setId(UUID.randomUUID().toString());
+        book.setId(book.getId());
         bookService.addBook(book);
         return book;
     }
@@ -56,7 +56,7 @@ public class BookController {
     @PostMapping(value = "/create/all")
     public Boolean createAll(@RequestBody List<BookEntity> list) {
         for (BookEntity book : list) {
-            book.setId(UUID.randomUUID().toString());
+            book.setId(book.getId());
             bookService.addBook(book);
         }
         return true;

@@ -21,7 +21,7 @@ public class StudentController {
 
     public StudentController() {
         StudentDTO s1 = new StudentDTO();
-        s1.setId("1");
+        s1.setId(1);
         s1.setName("Alish");
         s1.setSurname("Aliyev");
 
@@ -71,7 +71,7 @@ public class StudentController {
     @PostMapping(value = "/create/all")
     public Boolean createAll(@RequestBody List<StudentDTO> list) {
         for (StudentDTO dto : list) {
-            dto.setId("1");
+            dto.setId(1);
             studentList.add(dto);
         }
         return true;

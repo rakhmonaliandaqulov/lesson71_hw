@@ -1,12 +1,13 @@
-package com.example.dto;
+package com.example.entity;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class StudentDTO {
+public class RequestModel {
+
     private Integer id;
     private String name;
-    private String surname;
+
 }

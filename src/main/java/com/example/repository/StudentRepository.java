@@ -22,7 +22,7 @@ public class StudentRepository {
         return student;
     }
 
-    public StudentEntity get(String id) {
+    public StudentEntity get(Integer id) {
         Session session = sessionFactory.openSession();
         StudentEntity entity =  session.find(StudentEntity.class, id);
         session.close();

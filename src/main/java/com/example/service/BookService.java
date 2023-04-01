@@ -35,7 +35,7 @@ public class BookService {
         return bookList;
     }
 
-    public Boolean deleteBook(String bookId) {
+    public Boolean deleteBook(Integer bookId) {
         BookEntity book = bookRepository.getId(bookId);
         if (book == null) {
             System.out.println("\n Not found book.");

@@ -14,7 +14,7 @@ import java.util.Set;
 public class BookEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Integer id;
     @Column(name = "title")
     private String title;
     @Column(name = "author")
