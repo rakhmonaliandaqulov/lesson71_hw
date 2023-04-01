@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class StudentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
     @Column(name = "name")
     private String name;
     @Column(name = "surname", nullable = false)

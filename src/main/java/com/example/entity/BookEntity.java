@@ -14,13 +14,13 @@ import java.util.Set;
 public class BookEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String id;
     @Column(name = "title")
     private String title;
     @Column(name = "author")
     private String author;
     @Column(name = "publish_year")
-    private LocalDate publishYear; //
+    private String publishYear; //
     @Column(name = "amount")
     private Integer amount;
     @Column(name = "visible")

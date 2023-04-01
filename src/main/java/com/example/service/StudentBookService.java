@@ -29,7 +29,7 @@ public class StudentBookService {
             return null;
         }
         // check book
-        BookEntity bookEntity = bookRepository.get(dto.getBookId());
+        BookEntity bookEntity = bookRepository.getId(dto.getBookId());
         if (bookEntity == null) {
             return null;
         }

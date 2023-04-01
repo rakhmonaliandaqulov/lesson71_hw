@@ -1,0 +1,17 @@
+### Book list
+GET localhost:8080/book/list
+
+### Book create
+POST localhost:8080/book/create
+Content-Type: application/json
+
+{
+  "title": "java",
+  "author": "S.Ahmad",
+  "amount": "6",
+  "publishYear": "2003",
+  "visible": "true"
+
+}
+### Book delete
+DELETE localhost:8080/student/delete/529a9e08-e2c3-4d56-a1d6-c26aa341f805
