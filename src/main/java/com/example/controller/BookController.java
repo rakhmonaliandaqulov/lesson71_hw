@@ -1,31 +1,29 @@
 package com.example.controller;
 
+import com.example.dto.BookDto;
 import com.example.entity.BookEntity;
 import com.example.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
-@RequestMapping(value = "book")
+@RequestMapping(value = "/book")
 public class BookController {
     @Autowired
     private BookService bookService;
-    private List<BookEntity> bookEntityList = new LinkedList<>();
+    private List<BookDto> bookdtoList = new LinkedList<>();
     public BookController() {
-        BookEntity s1 = new BookEntity();
-        s1.setId(s1.getId());
-        s1.setTitle(String.valueOf(1212));
-        s1.setAuthor("Ali Aliyev");
-        s1.setAmount(12);
-        s1.setPublishYear("2003");
-        s1.setVisible(Boolean.TRUE);
+        BookDto b1 = new BookDto();
+        b1.setId(10);
+        b1.setTitle("JAva");
+        b1.setAuthor("A.Aliyev");
+        b1.setAmount(12);
+        b1.setPublishYear("2003-yil");
+        b1.setVisible(Boolean.TRUE);
 
-        bookEntityList.add(s1);
+        bookService.addBook(b1);
     }
     @GetMapping(value = "/list")
     public List<BookEntity> getAll() {
@@ -33,8 +31,8 @@ public class BookController {
     }
 
     @GetMapping(value = "/get/{id}")
-    public BookEntity getById(@PathVariable("id") String id) {
-        Optional<BookEntity> optional = bookEntityList.stream()
+    public BookEntity getById(@PathVariable("id") Integer id) {
+        Optional<BookEntity> optional = bookService.bookList().stream()
                 .filter(studentDTO -> studentDTO.getId().equals(id))
                 .findAny();
         return optional.orElse(null);
@@ -47,24 +45,24 @@ public class BookController {
 
 
     @PostMapping(value = "/create")
-    public BookEntity create(@RequestBody BookEntity book) {
+    public BookDto create(@RequestBody BookDto book) {
         book.setId(book.getId());
         bookService.addBook(book);
         return book;
     }
 
-    @PostMapping(value = "/create/all")
-    public Boolean createAll(@RequestBody List<BookEntity> list) {
-        for (BookEntity book : list) {
+    /*@PostMapping(value = "/create/all")
+    public Boolean createAll(@RequestBody List<Bookdto> list) {
+        for (Bookdto book : list) {
             book.setId(book.getId());
             bookService.addBook(book);
         }
         return true;
-    }
+    }*/
 
-    /*@PutMapping(value = "/update/{id}")
-    public Boolean update(@PathVariable("id")String id, @RequestBody BookEntity studentDTO) {
-        for (BookEntity dto : studentDTOList) {
+   /* @PutMapping(value = "/update/{id}")
+    public Boolean update(@PathVariable("id") Integer id, @RequestBody Bookdto bookdto) {
+        for (Bookdto dto : bookdtoList) {
             if (dto.getId().equals(id)) {
                 dto.setName(studentDTO.getName());
                 dto.setSurname(studentDTO.getSurname());

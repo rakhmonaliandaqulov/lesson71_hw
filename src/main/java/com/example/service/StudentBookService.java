@@ -1,6 +1,6 @@
 package com.example.service;
 
-import com.example.dto.StudentBookDTO;
+import com.example.dto.StudentBookDto;
 import com.example.entity.BookEntity;
 import com.example.entity.StudentBookEntity;
 import com.example.entity.StudentEntity;
@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class StudentBookService {
@@ -22,7 +23,7 @@ public class StudentBookService {
     @Autowired
     private StudentBookRepository studentBookRepository;
 
-    public StudentBookDTO takeBook(StudentBookDTO dto) {
+    public StudentBookDto takeBook(StudentBookDto dto) {
         // check student
         StudentEntity studentEntity = studentRepository.get(dto.getStudentId());
         if (studentEntity == null) {
@@ -45,5 +46,10 @@ public class StudentBookService {
         dto.setStatus(entity.getStatus());
         dto.setCreatedDate(entity.getCreatedDate());
         return dto;
+    }
+
+    public List<StudentBookDto> studentBookList() {
+        studentBookRepository.studentBookList();
+        return null;
     }
 }

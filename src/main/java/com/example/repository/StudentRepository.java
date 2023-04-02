@@ -30,4 +30,14 @@ public class StudentRepository {
     }
 
 
+   /* public List<StudentDTO> studentList() {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        List<StudentDTO> studentDTOList = session.createQuery("from StudentDTO", StudentDTO.class).getResultList();
+        transaction.commit();
+
+        session.close();
+        sessionFactory.close();
+        return studentDTOList;
+    }*/
 }

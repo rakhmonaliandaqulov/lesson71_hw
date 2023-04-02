@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.dto.BookDto;
 import com.example.entity.BookEntity;
 import com.example.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,17 +12,17 @@ import java.util.List;
 public class BookService {
     @Autowired
     private BookRepository bookRepository;
-    public void addBook(BookEntity book) {
-        book.setTitle(book.getTitle());
-        book.setAuthor(book.getAuthor());
-        book.setPublishYear(book.getPublishYear());
-        book.setAmount(book.getAmount());
+    public BookDto addBook(BookDto dto) {
+        BookEntity entity = new BookEntity();
+        entity.setTitle(dto.getTitle());
+        entity.setAuthor(dto.getAuthor());
+        entity.setPublishYear(dto.getPublishYear());
+        entity.setAmount(dto.getAmount());
 
-        int n = bookRepository.save(book);
-        if (n != 0) {
-            System.out.println("\n Book added succesfully!");
-            return;
-        }else System.out.println("Error.");
+        bookRepository.save(entity);
+        dto.setId(entity.getId());
+        return dto;
+
     }
 
     public List<BookEntity> bookList() {

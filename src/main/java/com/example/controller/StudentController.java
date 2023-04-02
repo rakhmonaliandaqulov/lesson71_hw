@@ -1,10 +1,9 @@
 package com.example.controller;
 
-import com.example.dto.StudentDTO;
+import com.example.dto.StudentDto;
 import com.example.exp.AppBadRequestException;
 import com.example.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,10 +16,10 @@ import java.util.Optional;
 public class StudentController {
     @Autowired
     private StudentService studentService;
-    private List<StudentDTO> studentList = new LinkedList<>();
+    private List<StudentDto> studentList = new LinkedList<>();
 
     public StudentController() {
-        StudentDTO s1 = new StudentDTO();
+        StudentDto s1 = new StudentDto();
         s1.setId(1);
         s1.setName("Alish");
         s1.setSurname("Aliyev");
@@ -29,13 +28,13 @@ public class StudentController {
     }
 
     @GetMapping("/list")
-    public List<StudentDTO> getAll() {
-        return studentList;
+    public List<StudentDto> getAll() {
+        return studentService.studentLIst();
     }
 
     @GetMapping(value = "/get/{id}")
-    public ResponseEntity<?> getById(@PathVariable("id") String id) {
-        Optional<StudentDTO> optional = studentList.stream().filter(studentDTO -> studentDTO.getId().equals(id)).findAny();
+    public ResponseEntity<?> getById(@PathVariable("id") Integer id) {
+        Optional<StudentDto> optional = studentService.studentLIst().stream().filter(studentDTO -> studentDTO.getId().equals(id)).findAny();
         if (optional.isEmpty()) {
             return ResponseEntity.badRequest().body("Student Not Found");
         }
@@ -43,7 +42,7 @@ public class StudentController {
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<?> create(@RequestBody StudentDTO studentDTO) {
+    public ResponseEntity<?> create(@RequestBody StudentDto studentDTO) {
 //         studentService.crate(studentDTO);
 //        return new ResponseEntity<>("test message", HttpStatus.OK);
 //        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -60,7 +59,7 @@ public class StudentController {
 //        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 //        return ResponseEntity.badRequest().build();
         try {
-            StudentDTO response = studentService.crate(studentDTO);
+            StudentDto response = studentService.crate(studentDTO);
             return ResponseEntity.ok(response);
         } catch (AppBadRequestException e) {
             e.printStackTrace();
@@ -68,17 +67,17 @@ public class StudentController {
         }
     }
 
-    @PostMapping(value = "/create/all")
+    /*@PostMapping(value = "/create/all")
     public Boolean createAll(@RequestBody List<StudentDTO> list) {
         for (StudentDTO dto : list) {
             dto.setId(1);
             studentList.add(dto);
         }
         return true;
-    }
+    }*/
 
-    @PutMapping(value = "/update/{id}")
-    public Boolean update(@PathVariable("id") String id, @RequestBody StudentDTO studentDTO) {
+   /* @PutMapping(value = "/update/{id}")
+    public Boolean update(@PathVariable("id") Integer id, @RequestBody StudentDTO studentDTO) {
         for (StudentDTO dto : studentList) {
             if (dto.getId().equals(id)) {
                 dto.setName(studentDTO.getName());
@@ -87,10 +86,10 @@ public class StudentController {
             }
         }
         return false;
-    }
+    }*/
 
     @DeleteMapping(value = "/delete/{id}")
     public Boolean delete(@PathVariable("id") String id) {
-        return studentList.removeIf(studentDTO -> studentDTO.getId().equals(id));
+        return studentService.studentLIst().removeIf(studentDTO -> studentDTO.getId().equals(id));
     }
 }
